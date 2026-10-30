@@ -1,0 +1,235 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOOGSH</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #fdf8e9;
+            color: #263746;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .icon {
+            font-size: 65px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 12px;
+            color: #e5a900;
+        }
+
+        p {
+            color: #777;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        .yes {
+            background: #f5c842;
+            color: #263746;
+        }
+
+        .no {
+            background: #e9eef1;
+            color: #263746;
+            position: relative;
+            z-index: 10;
+        }
+
+        #movie {
+            display: none;
+        }
+
+        .video {
+            width: 100%;
+            margin: 25px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #e9eef1;
+        }
+
+        iframe {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border: none;
+        }
+
+        .back {
+            background: #263746;
+            color: white;
+        }
+
+        .footer {
+            margin-top: 50px;
+            font-size: 11px;
+            color: #aaa;
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 27px;
+            }
+
+            .icon {
+                font-size: 55px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- HOME SCREEN -->
+        <section id="home">
+
+            <div class="icon"></div>
+
+            <h1>Ano tara?</h1>
+
+            <p>
+                Ready ka na ba?
+                <br>
+                Arat na!!
+            </p>
+
+            <div class="buttons">
+                <button class="yes" onclick="startMovie()">
+                    Uuness
+                </button>
+
+                <button
+                    class="no"
+                    id="noButton"
+                    onmouseenter="runAway()"
+                    ontouchstart="runAway()"
+                    onclick="runAway()">
+                    Dili
+                </button>
+            </div>
+
+            <p id="message" style="margin-top: 20px;"></p>
+
+        </section>
+
+
+        <!-- MOVIE SCREEN -->
+        <section id="movie">
+
+            <div class="icon"></div>
+
+            <h1>Wag ka magreklamo!</h1>
+
+            <p>Welcome to Going bulilit.</p>
+
+            <div class="video">
+                <iframe
+                    src="https://www.youtube.com/embed/juAqRPu4bT0"
+                    title="SpongeBob Movie"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <button class="back" onclick="goBack()">
+                Go back
+            </button>
+
+        </section>
+
+
+        <div class="footer">
+            NOOD KA LANG DYAN
+        </div>
+
+    </div>
+
+
+    <script>
+        function startMovie() {
+            document.getElementById("home").style.display = "none";
+            document.getElementById("movie").style.display = "block";
+        }
+
+        function runAway() {
+            const button = document.getElementById("noButton");
+
+            // Move button outside its original position
+            button.style.position = "fixed";
+
+            const maxX = window.innerWidth - button.offsetWidth - 20;
+            const maxY = window.innerHeight - button.offsetHeight - 20;
+
+            const randomX = 20 + Math.random() * Math.max(0, maxX - 20);
+            const randomY = 20 + Math.random() * Math.max(0, maxY - 20);
+
+            button.style.left = randomX + "px";
+            button.style.top = randomY + "px";
+
+            document.getElementById("message").textContent =
+                "Panis ka boi HAHAHA! 😂";
+        }
+
+        function goBack() {
+            document.getElementById("movie").style.display = "none";
+            document.getElementById("home").style.display = "block";
+
+            // Reset Dili button position
+            const button = document.getElementById("noButton");
+            button.style.position = "relative";
+            button.style.left = "auto";
+            button.style.top = "auto";
+        }
+    </script>
+
+</body>
+</html>
